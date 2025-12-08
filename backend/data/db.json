@@ -1,20 +1,14 @@
 {
   "users": [
     {
-      "id": "1765217692707",
-      "email": "gfngfbgxhxf1212@gmail.com",
-      "password": "$2a$12$5SPnz6vp5zGam1SzWfj4W.PZZthQtlQEaalmQIU.bPilovwKZ/rhi",
+      "id": "1765222242145",
+      "email": "gfngfbgxhxfd1212@gmail.com",
+      "password": "$2a$12$DZfuzYV2z28kAud8ZbHkl.gFb8gPFpKXCOkLZeoc22CYA74VgLeVG",
       "name": "fdffdvdfvfdd",
       "userType": "business",
-      "otpVerified": false,
-      "createdAt": "2025-12-08T18:14:52.707Z"
+      "otpVerified": true,
+      "createdAt": "2025-12-08T19:30:42.145Z"
     }
   ],
-  "otps": [
-    {
-      "email": "gfngfbgxhxf1212@gmail.com",
-      "otp": "170122",
-      "expiresAt": 1765218292707
-    }
-  ]
+  "otps": []
 }

@@ -66,9 +66,13 @@ async function connectMongo() {
 }
 
 // Attempt initial connection on module load
-connectMongo().catch(err => {
-  console.error('[MongoDB] Init error:', err.message);
-});
+(async () => {
+  try {
+    await connectMongo();
+  } catch (err) {
+    console.error('[MongoDB] Init error:', err.message);
+  }
+})();
 
 export async function isMongo() {
   const uri = process.env.MONGODB_URI;
