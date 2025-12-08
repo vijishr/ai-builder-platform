@@ -1,0 +1,95 @@
+{
+  "name": "ai-builder-backend",
+  "version": "1.0.0",
+  "description": "AI Builder Platform Backend - Node.js + Express",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js > backend.log 2>&1",
+    "dev": "nodemon src/server.js",
+    "test": "jest --detectOpenHandles",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "frontend": "cd \"d:\\vijish web work\\ai-builder-platform\\frontend\" && npm install && npm run dev",
+    "reinstall": "cd \"d:\\vijish web work\\ai-builder-platform\\backend\" && rmdir /s /q node_modules 2>nul && del package-lock.json 2>nul && npm install --legacy-peer-deps && node src/server.js",
+    "postinstall": "echo 1. Open File Explorer && echo 2. Navigate to: D:\\vijish web work\\ai-builder-platform\\ && echo 3. Double-click: RUN_ALL.bat && echo 4. Two command windows will open (backend + frontend) && echo 5. Wait 30 seconds for both to start && echo 6. Your browser opens automatically to http://localhost:3000"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1599.0",
+    "axios": "^1.6.5",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^12.5.0",
+    "bull": "^4.11.5",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.0",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "lowdb": "^3.0.0",
+    "mongodb": "^5.7.0",
+    "mongoose": "^8.0.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.7",
+    "openai": "^4.28.0",
+    "pg": "^8.11.3",
+    "razorpay": "^2.9.2",
+    "redis": "^4.6.12",
+    "sequelize": "^6.35.1",
+    "socket.io": "^4.7.2",
+    "stripe": "^14.10.0",
+    "swagger-ui-express": "^4.6.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.3"
+  },
+  "keywords": [
+    "ai",
+    "builder",
+    "api",
+    "backend",
+    "express"
+  ],
+  "author": "Your Name",
+  "license": "PROPRIETARY",
+  "homepage": "http://localhost:3000",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/ai-builder-backend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/ai-builder-backend/issues"
+  },
+  "curl": {
+    "health_check": "curl -v http://localhost:5000/api/v1/health"
+  },
+  "windows": {
+    "start": "d:\\vijish web work\\ai-builder-platform\\DIAGNOSE_AND_START.bat"
+  },
+  "banner": {
+    "enabled": true,
+    "text": [
+      "╔════════════════════════════════════════╗",
+      "║   AI BUILDER PLATFORM - BACKEND API    ║",
+      "╚════════════════════════════════════════╝",
+      "",
+      "📡 Server running on port: 5000",
+      "✅ Ready to accept requests!"
+    ]
+  },
+  "status": {
+    "status": "OK",
+    "timestamp": "2025-12-04T...",
+    "version": "1.0.0"
+  },
+  "server": {
+    "host": "0.0.0.0",
+    "port": 3000
+  }
+}

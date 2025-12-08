@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6-alpine
+    container_name: ai-builder-mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: ai_builder
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - ai-network
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-builder-backend
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      MONGODB_URI: mongodb://admin:admin123@mongodb:27017/ai_builder
+      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+      JWT_REFRESH_SECRET: your-super-secret-refresh-key-change-this-in-production
+      CORS_ORIGIN: http://localhost:3000
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - ./backend/data:/app/backend/data
+      - ./backend/src:/app/backend/src
+    networks:
+      - ai-network
+    healthcheck:
+      test: curl -f http://localhost:5000/api/v1/health || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Frontend (Next.js)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ai-builder-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:5000/api/v1
+      NODE_ENV: production
+    depends_on:
+      - backend
+    networks:
+      - ai-network
+    healthcheck:
+      test: curl -f http://localhost:3000 || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Agent Executor (optional - for containerized code execution)
+  executor:
+    image: node:18-alpine
+    container_name: ai-builder-executor
+    working_dir: /agent-work
+    volumes:
+      - ./backend/data/agent_runs:/agent-work:ro
+    networks:
+      - ai-network
+    command: tail -f /dev/null  # Keep running for on-demand execution
+    profiles:
+      - executor  # Only start with: docker-compose --profile executor up
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  ai-network:
+    driver: bridge

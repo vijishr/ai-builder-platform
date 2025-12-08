@@ -1,0 +1,12 @@
+✓ / (Home)
+✓ /signup (Registration)
+✓ /login (Login)
+✓ /dashboard (Main dashboard with 6 cards)
+✓ /verify-email (OTP verification)
+✓ /ai (AI Generator) 
+✓ /agents (AI Agents Manager) ← NEW
+✓ /projects (Project Management)
+✓ /pricing (Pricing Plans) ← NEW
+✓ /dashboard-dev (Dev Tools)
+
+Invoke-RestMethod -Method Post -Uri http://localhost:5000/api/v1/ai/agents/my-agent/auto-run -Body (@{ prompt = "Landing page for eco-sneakers" } | ConvertTo-Json) -ContentType 'application/json'

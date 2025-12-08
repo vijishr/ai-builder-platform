@@ -1,0 +1,62 @@
+{
+  "users": [
+    {
+      "id": "1764944081161",
+      "email": "vijishr869@gmail.com",
+      "password": "$2a$12$aWVqAC9VSB64Ed4ibCERxOxXBO5WVR4QV/6rTF438BMoAHof3Dur2",
+      "name": "vijish",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-05T14:14:41.161Z"
+    },
+    {
+      "id": "1764995946536",
+      "email": "vtest+1@example.com",
+      "password": "$2a$12$c8TFd0OyhKpOQ7GL5kXeT.xkJ4KGRg0hL1MEPMdhm/Fvkkw8WIWvK",
+      "name": "testuser",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-06T04:39:06.537Z"
+    },
+    {
+      "id": "1764996554973",
+      "email": "you@example.com",
+      "password": "$2a$12$yLswZVOY98.g4DtwgQC7LO6uY8lD8oMy0rOzah29Y3jJ7Y01QV546",
+      "name": "you",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-06T04:49:14.973Z"
+    },
+    {
+      "id": "1765041793264",
+      "email": "test12321@gmail.com",
+      "password": "$2a$12$MQy3l8tSEcjOymQp/7/ajO2GbkOKpg7grm85j9cVwOZVDA2E3e8Ci",
+      "name": "viji",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-06T17:23:13.264Z"
+    }
+  ],
+  "otps": [
+    {
+      "email": "vijishr869@gmail.com",
+      "otp": "969432",
+      "expiresAt": 1764944681161
+    },
+    {
+      "email": "vtest+1@example.com",
+      "otp": "752710",
+      "expiresAt": 1764996546537
+    },
+    {
+      "email": "you@example.com",
+      "otp": "846159",
+      "expiresAt": 1764997154973
+    },
+    {
+      "email": "test12321@gmail.com",
+      "otp": "696532",
+      "expiresAt": 1765042393264
+    }
+  ]
+}

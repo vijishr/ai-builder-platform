@@ -1,0 +1,33 @@
+# Dockerfile for AI Agent Runtime Executor
+# Provides a sandboxed Node.js environment for safe code execution
+
+FROM node:18-alpine
+
+LABEL maintainer="ai-builder-platform"
+LABEL description="Sandboxed executor for AI-generated code"
+
+# Install security tools
+RUN apk add --no-cache \
+    dumb-init \
+    curl \
+    ca-certificates \
+    && rm -rf /var/cache/apk/*
+
+# Create non-root user
+RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
+
+# Set working directory
+WORKDIR /agent-work
+
+# Copy generated code (will be mounted)
+# This is a placeholder - actual code is volume-mounted at runtime
+COPY --chown=nodejs:nodejs . .
+
+# Set user
+USER nodejs
+
+# Use dumb-init to handle signals properly
+ENTRYPOINT ["/usr/sbin/dumb-init", "--"]
+
+# Default command: run tests
+CMD ["node", "test.js"]

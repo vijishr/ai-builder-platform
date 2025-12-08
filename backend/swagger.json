@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AI Builder Platform API",
+    "version": "1.0.0",
+    "description": "Basic API documentation for AI Builder Platform (auto-generated minimal spec)."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000/api/v1",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Health check",
+        "responses": {
+          "200": {
+            "description": "Service status",
+            "content": {
+              "application/json": {
+                "example": {
+                  "status": "OK",
+                  "timestamp": "2025-12-04T00:00:00.000Z",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "summary": "Register a new user",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "password": { "type": "string" },
+                  "userType": { "type": "string" }
+                },
+                "required": ["email","password","name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "User created" },
+          "400": { "description": "Validation error" }
+        }
+      }
+    }
+  }
+}

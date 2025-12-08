@@ -1,0 +1,9 @@
+@echo off
+REM Simple startup script - no complexity
+cd /d "D:\vijish web work\ai-builder-platform\backend"
+echo Installing backend deps...
+call npm install --legacy-peer-deps
+echo DB Init...
+call node src/db/init.js
+echo Starting backend...
+call node src/server.js
