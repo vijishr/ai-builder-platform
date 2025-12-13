@@ -69,5 +69,12 @@
   ],
   "database": {
     "uri": "mongodb+srv://username:password@cluster0.k24pemu.mongodb.net/ai_builder?retryWrites=true&w=majority"
-  }
+  },
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": []
 }
