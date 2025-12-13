@@ -33,28 +33,41 @@ export class AIModelManager {
    * Initialize all available models
    */
   initializeModels() {
+    // Log detected keys for easier debugging
+    console.log('[AIModelManager] Initializing models. Keys present:', {
+      OPENAI: !!process.env.OPENAI_API_KEY,
+      GEMINI: !!process.env.GEMINI_API_KEY,
+      ANTHROPIC: !!process.env.ANTHROPIC_API_KEY
+    })
+
     try {
       if (process.env.OPENAI_API_KEY) {
+        console.log('[AIModelManager] Instantiating OpenAIModel')
         this.models.openai = new OpenAIModel()
+        console.log('[AIModelManager] OpenAIModel initialized')
       }
     } catch (e) {
-      console.warn('OpenAI not initialized:', e.message)
+      console.warn('OpenAI not initialized:', e && e.message ? e.message : e)
     }
 
     try {
       if (process.env.GEMINI_API_KEY) {
+        console.log('[AIModelManager] Instantiating GeminiModel')
         this.models.gemini = new GeminiModel()
+        console.log('[AIModelManager] GeminiModel initialized')
       }
     } catch (e) {
-      console.warn('Gemini not initialized:', e.message)
+      console.warn('Gemini not initialized:', e && e.message ? e.message : e)
     }
 
     try {
       if (process.env.ANTHROPIC_API_KEY) {
+        console.log('[AIModelManager] Instantiating ClaudeModel')
         this.models.claude = new ClaudeModel()
+        console.log('[AIModelManager] ClaudeModel initialized')
       }
     } catch (e) {
-      console.warn('Claude not initialized:', e.message)
+      console.warn('Claude not initialized:', e && e.message ? e.message : e)
     }
   }
 

@@ -8,7 +8,66 @@
       "userType": "business",
       "otpVerified": true,
       "createdAt": "2025-12-08T19:30:42.145Z"
+    },
+    {
+      "id": "1765242681453",
+      "email": "balagi12112@gmail.com",
+      "password": "$2a$12$Ev5DFJJ98xkTZ7wF/0K0AeJym.TgE/g7Wy1p2hZQ8R4FGzQeP8CX6",
+      "name": "vfvkfmvlks",
+      "userType": "business",
+      "otpVerified": true,
+      "createdAt": "2025-12-09T01:11:21.453Z"
+    },
+    {
+      "id": "1765636902658",
+      "email": "vdcfdfcdd12@gmail.com",
+      "password": "$2a$12$6h4s6KU/Eh2Na4L2ocOMFu19ohaiQEuRgW8SxYbleWbzB7kocRrwO",
+      "name": "vfvdds",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-13T14:41:42.658Z"
+    },
+    {
+      "id": "1765637039763",
+      "email": "vdcdfdfcdd12@gmail.com",
+      "password": "$2a$12$eETcWwiSQzvzr2KqyOEzBOOrK8qnP18Dc/7nMKRuEs/Mx6h.Nbc4q",
+      "name": "vfvdds",
+      "userType": "business",
+      "otpVerified": true,
+      "createdAt": "2025-12-13T14:43:59.763Z"
+    },
+    {
+      "id": "1765640129783",
+      "email": "vdcfdfcsdd12@gmail.com",
+      "password": "$2a$12$FH4rqgx8UZZu5UWYk0PSserpwYi2ODl31HO17lPlJP5Gij8G68Hqm",
+      "name": "vfvdds",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-13T15:35:29.783Z"
+    },
+    {
+      "id": "1765640145592",
+      "email": "vdcfdfcssasdsdd12@gmail.com",
+      "password": "$2a$12$Ih.Q.JLQFR0SX8rolzvPY.Clv7MQNnKrLyRaql8B8DHJ.se.3YTrm",
+      "name": "vfvdds",
+      "userType": "business",
+      "otpVerified": true,
+      "createdAt": "2025-12-13T15:35:45.592Z"
     }
   ],
-  "otps": []
+  "otps": [
+    {
+      "email": "vdcfdfcdd12@gmail.com",
+      "otp": "692352",
+      "expiresAt": 1765637502659
+    },
+    {
+      "email": "vdcfdfcsdd12@gmail.com",
+      "otp": "970548",
+      "expiresAt": 1765640729783
+    }
+  ],
+  "database": {
+    "uri": "mongodb+srv://username:password@cluster0.k24pemu.mongodb.net/ai_builder?retryWrites=true&w=majority"
+  }
 }

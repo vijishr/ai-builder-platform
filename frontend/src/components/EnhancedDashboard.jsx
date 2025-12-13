@@ -18,7 +18,8 @@ export default function EnhancedDashboard() {
     totalRequests: 0,
     apiCallsUsed: 45,
     tokensUsed: 1234,
-    costEstimate: '$2.45'
+    // Store numeric estimate in INR
+    costEstimate: 200.00
   });
 
   // Load saved data from localStorage on mount
@@ -292,8 +293,8 @@ export default function EnhancedDashboard() {
                   <span className="font-bold text-cyan-400">{stats.tokensUsed}</span>
                 </div>
                 <div className="flex justify-between items-center pt-3 border-t border-white/10">
-                  <span className="text-slate-400 text-sm">Est. Cost</span>
-                  <span className="font-bold text-green-400">{stats.costEstimate}</span>
+                  <span className="text-slate-400 text-sm">Est. Cost (INR)</span>
+                  <span className="font-bold text-green-400">₹{Number(stats.costEstimate).toFixed(2)}</span>
                 </div>
               </div>
             </div>

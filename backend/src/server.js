@@ -10,18 +10,27 @@ import fs from 'fs';
 import path from 'path';
 import swaggerUi from 'swagger-ui-express';
 
-// Import routes
-import authRoutes from './routes/auth.js';
-import projectRoutes from './routes/projects.js';
-import aiRoutes from './routes/ai.js';
-import aiModelsRoutes from './routes/aiModels.js';
-import deploymentRoutes from './routes/deployment.js';
-import dashboardRoutes from './routes/dashboard.js';
-import debugRoutes from './routes/debug.js';
-import reasoningRoutes from './routes/reasoning.js';
-
-// Load environment variables
+// Load environment variables early so imported modules see process.env
 dotenv.config();
+
+// Import routes dynamically after env is loaded so route modules (and any
+// model managers they import) can read environment variables during their
+// top-level initialization. Using dynamic import with top-level await.
+let authRoutes, projectRoutes, aiRoutes, aiModelsRoutes, deploymentRoutes, dashboardRoutes, debugRoutes, reasoningRoutes;
+try {
+  authRoutes = (await import('./routes/auth.js')).default;
+  projectRoutes = (await import('./routes/projects.js')).default;
+  aiRoutes = (await import('./routes/ai.js')).default;
+  aiModelsRoutes = (await import('./routes/aiModels.js')).default;
+  deploymentRoutes = (await import('./routes/deployment.js')).default;
+  dashboardRoutes = (await import('./routes/dashboard.js')).default;
+  debugRoutes = (await import('./routes/debug.js')).default;
+  reasoningRoutes = (await import('./routes/reasoning.js')).default;
+} catch (e) {
+  console.error('Failed to import route modules after loading env:', e && e.message ? e.message : e);
+  // Exit early so startup doesn't continue in a half-broken state
+  process.exit(1);
+}
 
 // Global error handlers
 process.on('unhandledRejection', (reason, promise) => {

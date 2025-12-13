@@ -37,30 +37,52 @@ const generateOTP = () => {
   return Math.floor(100000 + Math.random() * 900000).toString();
 };
 
-// Send Email
+// Send Email (robust for dev)
 const sendEmail = async (to, subject, text, html) => {
   try {
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
-      secure: true,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      }
-    });
+    // If SMTP is not configured, fall back to a Nodemailer test account
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS;
 
-    await transporter.sendMail({
-      from: process.env.SMTP_USER,
+    let transporter;
+
+    const smtpConfigured = smtpUser && smtpPass && !smtpUser.startsWith('your_') && !smtpPass.startsWith('your_');
+
+    if (smtpConfigured) {
+      transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST || 'smtp.gmail.com',
+        port: parseInt(process.env.SMTP_PORT || '465', 10),
+        secure: true,
+        auth: { user: smtpUser, pass: smtpPass }
+      });
+    } else {
+      console.warn('[Email] SMTP not configured or using placeholder credentials — using Nodemailer test account for development');
+      const testAccount = await nodemailer.createTestAccount();
+      transporter = nodemailer.createTransport({
+        host: testAccount.smtp.host,
+        port: testAccount.smtp.port,
+        secure: testAccount.smtp.secure,
+        auth: { user: testAccount.user, pass: testAccount.pass }
+      });
+    }
+
+    const info = await transporter.sendMail({
+      from: smtpConfigured ? process.env.SMTP_USER : 'no-reply@ai-builder.local',
       to,
       subject,
       text,
       html
     });
 
+    // If using test account, log preview URL so developer can view the email
+    if (!smtpConfigured) {
+      const preview = nodemailer.getTestMessageUrl(info);
+      console.log('[Email] Preview URL:', preview);
+    }
+
     return true;
   } catch (error) {
-    console.error('Email sending failed:', error);
+    console.error('Email sending failed:', error && error.message ? error.message : error);
     return false;
   }
 };
