@@ -53,7 +53,8 @@ const sendEmail = async (to, subject, text, html) => {
         host: process.env.SMTP_HOST || 'smtp.gmail.com',
         port: parseInt(process.env.SMTP_PORT || '465', 10),
         secure: true,
-        auth: { user: smtpUser, pass: smtpPass }
+        auth: { user: smtpUser, pass: smtpPass },
+        tls: { rejectUnauthorized: process.env.NODE_ENV === 'production' }
       });
     } else {
       console.warn('[Email] SMTP not configured or using placeholder credentials — using Nodemailer test account for development');
@@ -62,7 +63,8 @@ const sendEmail = async (to, subject, text, html) => {
         host: testAccount.smtp.host,
         port: testAccount.smtp.port,
         secure: testAccount.smtp.secure,
-        auth: { user: testAccount.user, pass: testAccount.pass }
+        auth: { user: testAccount.user, pass: testAccount.pass },
+        tls: { rejectUnauthorized: false }
       });
     }
 
@@ -157,7 +159,7 @@ router.post('/register', [
       // Try to persist to Mongo
       const mongoUser = await mongo.createUser({ ...user, createdAt: new Date(), otpVerified: false });
       console.log(`📊 MongoDB save result:`, mongoUser ? 'Success' : 'Failed');
-      
+
       if (!mongoUser) {
         // MongoDB failed, fall back to file DB
         console.log('⚠️  MongoDB failed, falling back to file DB');
@@ -168,9 +170,24 @@ router.post('/register', [
         console.log('✅ File DB written');
       } else {
         // MongoDB succeeded, store OTP there
-        console.log('💾 Saving OTP to MongoDB...');
-        await mongo.addOtp({ email, otp, expiresAt: Date.now() + 10 * 60 * 1000 });
-        console.log('✅ OTP saved to MongoDB');
+        try {
+          console.log('💾 Saving OTP to MongoDB...');
+          await mongo.addOtp({ email, otp, expiresAt: Date.now() + 10 * 60 * 1000 });
+          console.log('✅ OTP saved to MongoDB');
+        } catch (e) {
+          console.warn('⚠️ Could not save OTP to MongoDB:', e && e.message ? e.message : e);
+        }
+
+        // Also mirror to file DB for development/debugging so db.json contains records
+        try {
+          console.log('💾 Mirroring user and OTP to file DB for local debugging...');
+          db.data.users.push(user);
+          db.data.otps.push({ email, otp, expiresAt: Date.now() + 10 * 60 * 1000 });
+          await db.write();
+          console.log('✅ File DB written (mirror)');
+        } catch (e) {
+          console.warn('⚠️ Could not write mirror to file DB:', e && e.message ? e.message : e);
+        }
       }
     } else {
       // Use file DB directly

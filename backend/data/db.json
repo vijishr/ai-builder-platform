@@ -53,6 +53,60 @@
       "userType": "business",
       "otpVerified": true,
       "createdAt": "2025-12-13T15:35:45.592Z"
+    },
+    {
+      "id": "1765684467947",
+      "email": "vdcfdfc67dd12@gmail.com",
+      "password": "$2a$12$4sCx8bXZRNY.87ePx8FlUu2Fyf3pgfFT.lNRn.CQl61XAKVw0l8DO",
+      "name": "vfvdds",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-14T03:54:27.947Z"
+    },
+    {
+      "id": "1765684481677",
+      "email": "vdcfdfc67d34d12@gmail.com",
+      "password": "$2a$12$2h8wl2E9pxZBhbNCOZcgzuNjzg3..pL8memBiQpTad6BL9SigrvFS",
+      "name": "vfvdds",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-14T03:54:41.677Z"
+    },
+    {
+      "id": "1765685960707",
+      "email": "test+ui@example.com",
+      "password": "$2a$12$.L6jtSFRSrMIaogr7R590eMLBJMVGPjI.uGiSQ2/FZyedmCWRGjE2",
+      "name": "UI Test",
+      "userType": "student",
+      "otpVerified": false,
+      "createdAt": "2025-12-14T04:19:20.707Z"
+    },
+    {
+      "id": "1765687742469",
+      "email": "vijuyghtf2342@gmail.com",
+      "password": "$2a$12$13.2bg.4jH9XUxGjspNOGexaC3gcfit9jVKAw1aTd7Ihk1FqDQwrO",
+      "name": "bijijiijnij",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-14T04:49:02.469Z"
+    },
+    {
+      "id": "1765687754862",
+      "email": "vijuyyghtf2342@gmail.com",
+      "password": "$2a$12$NsqYWOQ1gtB3NRjd7WCQauko1kWmpPT.81nUzlBE2nsod9BIEfWX2",
+      "name": "bijijiijnij",
+      "userType": "business",
+      "otpVerified": false,
+      "createdAt": "2025-12-14T04:49:14.862Z"
+    },
+    {
+      "id": "1765689030933",
+      "email": "vdcfdfc1231dd12@gmail.com",
+      "password": "$2a$12$ZogeywrZXvmgQjJOLJ18C.HY.9wpYsBbE4V6uhfG2EPuP/XtNVdPW",
+      "name": "vfvdds",
+      "userType": "business",
+      "otpVerified": true,
+      "createdAt": "2025-12-14T05:10:30.933Z"
     }
   ],
   "otps": [
@@ -65,6 +119,31 @@
       "email": "vdcfdfcsdd12@gmail.com",
       "otp": "970548",
       "expiresAt": 1765640729783
+    },
+    {
+      "email": "vdcfdfc67dd12@gmail.com",
+      "otp": "266050",
+      "expiresAt": 1765685067947
+    },
+    {
+      "email": "vdcfdfc67d34d12@gmail.com",
+      "otp": "174326",
+      "expiresAt": 1765685081677
+    },
+    {
+      "email": "test+ui@example.com",
+      "otp": "376626",
+      "expiresAt": 1765686560707
+    },
+    {
+      "email": "vijuyghtf2342@gmail.com",
+      "otp": "773882",
+      "expiresAt": 1765688342469
+    },
+    {
+      "email": "vijuyyghtf2342@gmail.com",
+      "otp": "479324",
+      "expiresAt": 1765688354862
     }
   ],
   "database": {

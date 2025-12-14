@@ -271,3 +271,51 @@ router.delete('/memory', verifyToken, (req, res) => {
 })
 
 export default router
+
+// Development-only debug endpoint (no auth) to quickly test model generation
+if (process.env.NODE_ENV !== 'production') {
+  router.post('/debug-generate', async (req, res) => {
+    try {
+      const { prompt = 'Say hello from AI Builder', model } = req.body || {}
+      const result = await aiModelManager.generate(prompt, { model })
+      return res.json({ success: true, data: result })
+    } catch (err) {
+      return res.status(500).json({ success: false, message: err.message })
+    }
+  })
+}
+
+// Dev helper: list available models and run a quick probe call for each
+if (process.env.NODE_ENV !== 'production') {
+  router.get('/debug-models', async (req, res) => {
+    try {
+      const available = aiModelManager.getAvailableModels()
+      return res.json({ success: true, available })
+    } catch (e) {
+      return res.status(500).json({ success: false, message: e.message })
+    }
+  })
+
+  router.post('/debug-test-models', async (req, res) => {
+    try {
+      const prompt = req.body?.prompt || 'Hello, test models'
+      const results = {}
+      const models = ['openai', 'gemini', 'claude']
+      for (const m of models) {
+        if (!aiModelManager.models[m]) {
+          results[m] = { available: false }
+          continue
+        }
+        try {
+          const r = await aiModelManager.models[m].generate(prompt)
+          results[m] = { available: true, result: r }
+        } catch (err) {
+          results[m] = { available: true, error: err.message }
+        }
+      }
+      return res.json({ success: true, results })
+    } catch (e) {
+      return res.status(500).json({ success: false, message: e.message })
+    }
+  })
+}

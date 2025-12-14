@@ -157,6 +157,17 @@ Generate production-ready ${language} code with:
       }
     }
 
+    // If all configured models fail, provide a local mock fallback for development
+    if (process.env.NODE_ENV !== 'production') {
+      const mockContent = `Mock AI response (development): ${prompt}`
+      return {
+        success: true,
+        content: mockContent,
+        model: 'mock',
+        timestamp: new Date().toISOString()
+      }
+    }
+
     return {
       success: false,
       error: 'All models failed',
